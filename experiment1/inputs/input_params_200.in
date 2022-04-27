@@ -1,0 +1,7 @@
+numberOfProcesses=100
+staticPriority=0
+meanInterArrival=12
+meanCpuBurst=10
+meanIoBurst=10
+meanNumberBursts=6
+seed=200
