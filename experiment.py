@@ -3,21 +3,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from utils import (get_all_input_params, get_all_inputs, get_all_sim_params,
-                   get_output_data)
+from utils import get_all_input_params, get_all_sim_params, get_output_data
 
 
 class Experiment:
 
 	def __init__(self, directory):
 		self.directory = directory
-		self.input_data = get_all_inputs(directory + '/inputs')
 		self.input_params = get_all_input_params(directory + '/inputs')
 		self.sim_params = get_all_sim_params(directory + '/sim_params')
 		self.output_data = get_output_data(directory + '/schedulers')
 
+	def all_seeds(self):
+		return [s for (s, _) in self.input_params]
+	
 	def get_output(self, scheduler):
-		
 		return self.output_data[scheduler][:]
 	
 	def get_output_for_seed(self, scheduler, seed):
@@ -26,28 +26,8 @@ class Experiment:
 				return df
 		return None
 	
-	def get_input(self, seed: str):
-		return self.input_data[seed]
-	
 	def get_input_params(self, seed: str):
 		return self.input_params[seed]
-
-	def get_sim_params(self):
-		return self.sim_params
-		
-	def get_inputs(self):
-		return self.input_data
-
-
-	def plot_burst_frequences(self, scheduler: str, seed: str):
-
-		df = self.get_output_for_seed(scheduler, seed)
-		
-		fig, ax = plt.subplots(1, 1, figsize=(16, 6))
-
-
-
-
 		
 
 	## Returns a dataframe of a column for all combinations of schedulers and all seeds
@@ -88,19 +68,12 @@ class Experiment:
 				label='Started -> Terminated',
 				alpha=0.5,
 		)
-
 		
 		## Mark arrival time
 		ax.barh(df.index,df.startedTime - df.createdTime, left=df.createdTime, color='red', alpha=1, label="WaitingTime")
 
-
-		
-		
 		ax.set_yticks(list(range(df.id.max() + 1)))
 
-		
-
-		
 		ax.legend()
 
 	def plot_gantt_all(self, scheduler: str):

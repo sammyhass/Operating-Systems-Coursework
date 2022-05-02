@@ -11,19 +11,19 @@ readonly local EXPERIMENT_1_SEEDS=(50 100 200 531 120)
 readonly local EXPERIMENT_2_SEEDS=(1234 5678 91011 121314 151617)
 readonly local EXPERIMENT_3_SEEDS=(5124 6789 1234 5678 91011)
 
+## input parameters
 ## (number_of_processes, static_priority, mean_inter_arrival, mean_cpu_burst, mean_io_burst, mean_number_bursts)
 readonly local EXPERIMENT_1_INPUT_PARAMS=(50 0 12 10 10 6)
-
 readonly local EXPERIMENT_2_INPUT_PARAMS=(25 0 12 4 24 10)
-
-readonly local EXPERIMENT_3_INPUT_PARAMS=(30 0 12 10 10 6)
+readonly local EXPERIMENT_3_INPUT_PARAMS=(30 0 20 5 35 4)
 
 ## simulator parameters (excluding scheduling algorithm)
 # (time_limit, interrupt_time, time_quantum, initial_burst_estimate, alpha_burst_estimate, periodic)
 readonly local EXPERIMENT_1_SIMULATOR_PARAMS=(10000 1 5 5 0.5 false)
 readonly local EXPERIMENT_2_SIMULATOR_PARAMS=(5000 10 4 14 0.5 false)
-readonly local EXPERIMENT_3_SIMULATOR_PARAMS=(2000 10 4 5 0.5 false)
+readonly local EXPERIMENT_3_SIMULATOR_PARAMS=(5000 10 20 30 0.7 false)
 
+readonly local EXPERIMENT_3_SIMULATOR_PARAMS_IMPROVE=(5000 10 20 15 0.4 false)
 ### receives input parameters in form of: (file_to_write_to, number_of_processes, static_priority, mean_inter_arrival, mean_cpu_burst, mean_io_burst, mean_number_bursts, seed)
 write_input_params() {
 	local file_name=$1
@@ -103,6 +103,13 @@ run_experiment() {
 		input_params="${EXPERIMENT_3_INPUT_PARAMS[@]}"
 		sim_params="${EXPERIMENT_3_SIMULATOR_PARAMS[@]}"
 		seeds="${EXPERIMENT_3_SEEDS[@]}"
+	elif [ $1 -eq 4 ]; then
+		input_params="${EXPERIMENT_3_INPUT_PARAMS[@]}"
+		sim_params="${EXPERIMENT_3_SIMULATOR_PARAMS_IMPROVE[@]}"
+		seeds="${EXPERIMENT_3_SEEDS[@]}"
+	else
+		echo "Invalid experiment number"
+		exit 1
 	fi
 
 	mkdir -p $folder/inputs
@@ -136,6 +143,8 @@ main() {
 	run_experiment 1
 	run_experiment 2
 	run_experiment 3
+
+	run_experiment 4 ## experiment 4 is just a copy of experiment 3 with a different simulator parameters file to improve estimation of burst times
 }
 
 main

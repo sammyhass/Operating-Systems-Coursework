@@ -45,8 +45,8 @@ public class FeedbackRRScheduler extends AbstractScheduler {
         if (usedFullTimeQuantum) {
             // process should be demoted
             demote(process);
+            queue.remove(process);
         }
-        queue.remove(process);
         queue.add(process);
     }
 

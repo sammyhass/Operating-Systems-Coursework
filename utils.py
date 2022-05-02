@@ -5,27 +5,6 @@ import pandas as pd
 
 
 # ------------------------------------ UTILITY FUNCTIONS ----------------------------------------
-# Reads input data from a directory - files named 'input_data_{seed}.csv'
-# returns (seed, df) tuples
-def get_all_inputs(directory):
-	input_files = [f for f in listdir(directory) if f.startswith('input_data_')]
-
-	dfs = []
-
-	for f in (input_files):
-		seed = f.split('_')[-1].split('.')[0]
-		df = pd.read_csv(path.join(directory, f), sep=' ', on_bad_lines='skip', header=None)
-
-		cols = ['priority', 'arrival time']
-		for i in range(2, df.shape[1]):
-			cols.append('burst ' + str(i))
-		df.columns = cols
-		df.index.name = "Process"
-
-		dfs.append((seed, df))
-		
-	return dfs
-
 # Returns a dataframe of all parameters from a file `key=value` pair
 def get_params(fname):
 		df = pd.read_table(fname, sep='=', on_bad_lines='skip', header=None)
@@ -42,7 +21,7 @@ def get_all_input_params(directory):
 
 	for  f in input_files:
 		seed = f.split('_')[-1].split('.')[0]
-		dfs = (seed, get_params(path.join(directory, f)))
+		dfs.append((seed, get_params(path.join(directory, f))))
 	return dfs
 
 ## Returns an array of tuples of all the simulator params in form of (seed, df), df is a dataframe of the simulator params
