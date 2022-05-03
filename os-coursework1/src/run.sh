@@ -83,7 +83,7 @@ run_simulation() {
 
 ## runs a whole experiment, expects a number from 1 to 3 as a parameter
 run_experiment() {
-	local folder="experiment$1"
+	local folder="../experiment$1"
 	echo "Running Experiment $1"
 
 	mkdir -p $folder
