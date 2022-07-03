@@ -1,6 +1,6 @@
 # Operating Systems Coursework
 
-This repo contains the coursework that I undertook for my Operating Systems module which I took as part of my Computer Science Degree.
+This repo contains the coursework that I undertook for my Operating Systems module which I took as part of my Computer Science Degree in my second year at Sussex Uni.
 
 The task was to implement different CPU scheduling algorithms, and then to come up with a series of experiments to compare and contrast the performance of the different algorithms.
 
