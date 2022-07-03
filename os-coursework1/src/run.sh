@@ -81,7 +81,7 @@ run_simulation() {
 	$RUN Simulator $simulator_parameters_file $output_file $input_data_file
 }
 
-## runs a whole experiment, expects a number from 1 to 3 as a parameter
+## runs a whole experiment, expects a number from 1 to 4 as a parameter
 run_experiment() {
 	local folder="../experiment$1"
 	echo "Running Experiment $1"
