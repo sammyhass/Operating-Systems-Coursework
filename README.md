@@ -4,6 +4,8 @@ This repo contains the coursework that I undertook for my Operating Systems modu
 
 The task was to implement different CPU scheduling algorithms, and then to come up with a series of experiments to compare and contrast the performance of the different algorithms.
 
+For this coursework I received a mark of 95/100.
+
 ## Structure
 
 I'll only list the notable files and folders here, which I personally produced.
